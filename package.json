@@ -1,0 +1,22 @@
+{
+  "name": "searchadder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "wrangler pages deploy static"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wk-y/searchadder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wk-y/searchadder/issues"
+  },
+  "homepage": "https://github.com/wk-y/searchadder#readme",
+  "devDependencies": {
+    "wrangler": "^4.54.0"
+  }
+}
