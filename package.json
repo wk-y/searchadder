@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "wrangler pages deploy static"
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
   },
   "repository": {
     "type": "git",
