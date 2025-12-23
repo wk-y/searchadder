@@ -10,8 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/wk-y/searchadder.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "wk-y",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/wk-y/searchadder/issues"
   },
