@@ -12,9 +12,9 @@
 
 ## Examples
 
-* Google AI Mode <https://searchadder.pages.dev/?name=Google+AI+Mode&url=https%3A%2F%2Fwww.google.com%2Fsearch%3Fq%3D%25s%26udm%3D50>
-* Ecosia AI Search <https://searchadder.pages.dev/?name=Ecosia+AI&url=https%3A%2F%2Fwww.ecosia.org%2Fai-search%3Fq%3D%25s>
-* Brave Ask <https://searchadder.pages.dev/?name=Brave+Ask&url=https%3A%2F%2Fsearch.brave.com%2Fask%3Fq%3D%25s>
+* Google AI Mode <https://searchadder.ywk.workers.dev/#Google%20AI:https://www.google.com/search?q=%s&udm=50>
+* Ecosia AI Search <https://searchadder.ywk.workers.dev/#Ecosia%20AI:https://www.ecosia.org/ai-search?q=%s>
+* Brave Ask <https://searchadder.ywk.workers.dev/#Brave%20Ask:https://search.brave.com/ask?q=%s>
 
 ## Why
 
