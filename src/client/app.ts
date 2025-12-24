@@ -16,8 +16,4 @@ if (activeUrl) {
     document.write(engineLink.outerHTML);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const app = document.getElementById("app");
-    if (!app) throw Error("#app does not exist");
-    m.mount(app, UI);
-});
+document.addEventListener("DOMContentLoaded", () => m.mount(document.body, UI));

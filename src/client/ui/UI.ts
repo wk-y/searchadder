@@ -37,7 +37,9 @@ export default class UI implements m.ClassComponent {
 
         return [
             (selectedEngine
-                ? m(SearchBar, { url: selectedEngine })
+                ? m("div#searchBarContainer",
+                    m(SearchBar, { url: selectedEngine }),
+                )
                 : []
             ),
             m("form",

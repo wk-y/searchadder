@@ -1,0 +1,17 @@
+:root,
+body {
+    margin: 0;
+    padding: 0;
+    --bg: #fff;
+    --bg2: beige;
+
+    background: var(--bg);
+    font-family: sans-serif;
+}
+
+#searchBarContainer {
+    width: 100%;
+    background: var(--bg2);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
