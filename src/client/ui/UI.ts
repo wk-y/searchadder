@@ -1,10 +1,11 @@
 import m from "mithril";
-import "./SearchEngineDB";
-import SearchEngine from "./SearchEngine";
-import SearchEngineDB from "./SearchEngineDB";
-import SettingsStorage from "./SettingsStorage";
+import "../SearchEngineDB";
+import SearchEngine from "../SearchEngine";
+import SearchEngineDB from "../SearchEngineDB";
+import SettingsStorage from "../SettingsStorage";
+import SearchBar from "./SearchBar";
 
-export default class UI implements m.Component {
+export default class UI implements m.ClassComponent {
     _db: SearchEngineDB;
     _data: SearchEngine[];
     _settings: SettingsStorage;
@@ -24,6 +25,10 @@ export default class UI implements m.Component {
         const selectedEngine = this._settings.activeUrl;
 
         return [
+            (selectedEngine
+                ? m(SearchBar, { url: selectedEngine })
+                : []
+            ),
             m("form",
                 { onsubmit: (event: SubmitEvent) => this.handleAddEngineSubmit(event) },
                 m("label",

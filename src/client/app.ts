@@ -1,6 +1,6 @@
 import m from "mithril";
 import SearchEngineDB from "./SearchEngineDB";
-import UI from "./UI";
+import UI from "./ui/UI";
 import SettingsStorage from "./SettingsStorage";
 import { NAME } from "../constants";
 
@@ -19,4 +19,4 @@ if (activeUrl) {
     document.head.appendChild(engineLink);
 }
 
-m.mount(app, new UI());
+m.mount(app, UI);
