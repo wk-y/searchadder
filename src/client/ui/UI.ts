@@ -9,12 +9,23 @@ export default class UI implements m.ClassComponent {
     _db: SearchEngineDB;
     _data: SearchEngine[];
     _settings: SettingsStorage;
+    _prefilledEngine?: SearchEngine;
+
     loading: boolean = false;
 
     constructor() {
         this._db = SearchEngineDB.instance;
         this._data = [];
         this._settings = SettingsStorage.instance;
+
+        const hash = window.location.hash;
+        let hashSplitIndex = hash.indexOf(":");
+        if (hashSplitIndex >= 0) {
+            this._prefilledEngine = {
+                name: decodeURI(hash.substring(1, hashSplitIndex)),
+                url: hash.substring(hashSplitIndex + 1),
+            };
+        }
 
         this.refresh();
     }
@@ -33,11 +44,15 @@ export default class UI implements m.ClassComponent {
                 { onsubmit: (event: SubmitEvent) => this.handleAddEngineSubmit(event) },
                 m("label",
                     "Name: ",
-                    m(`input[type=text][name=name]`),
+                    m(`input[type=text][name=name]`,
+                        this._prefilledEngine ? { value: this._prefilledEngine.name } : {},
+                    ),
                 ),
                 m("label",
                     "URL: ",
-                    m(`input[type=url][name=url]`),
+                    m(`input[type=url][name=url]`,
+                        this._prefilledEngine ? { value: this._prefilledEngine.url } : {},
+                    ),
                 ),
                 m(`button[type=submit]`, "Add"),
             ),
