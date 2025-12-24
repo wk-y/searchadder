@@ -39,6 +39,7 @@ export default class UI implements m.Component {
             m("table",
                 this._data.map(engine =>
                     m("tr",
+                        { key: engine.url },
                         m(`input[type=radio][name=selectedEngine]`,
                             {
                                 onchange: () => this.setSelectedSearchEngine(engine.url),
