@@ -1,9 +1,13 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "my-worker",
+  "name": "searchadder",
   "compatibility_date": "2025-12-10",
-  "main": "src/index.ts",
+  "main": "src/server/index.ts",
   "assets": {
     "directory": "./static"
+  },
+  "build": {
+    "watch_dir": "./src",
+    "command": "npm run build"
   }
 }

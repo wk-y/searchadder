@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "esbuild --bundle src/client/app.ts --outdir=static/dist --minify --sourcemap",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   },
@@ -18,6 +19,11 @@
   },
   "homepage": "https://github.com/wk-y/searchadder#readme",
   "devDependencies": {
+    "@types/mithril": "^2.2.7",
+    "esbuild": "0.27.2",
     "wrangler": "^4.54.0"
+  },
+  "dependencies": {
+    "mithril": "^2.3.8"
   }
 }
