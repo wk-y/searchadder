@@ -3,6 +3,8 @@ import SearchEngine from "./SearchEngine";
 export default class SearchEngineDB {
     static SEARCH_ENGINE_STORE_NAME = "searchEngines";
 
+    static #instance?: SearchEngineDB;
+
     #db: Promise<IDBDatabase>;
 
     constructor() {
@@ -81,5 +83,9 @@ export default class SearchEngineDB {
             request.onerror = reject;
             request.onsuccess = resolve;
         });
+    }
+
+    static get instance(): SearchEngineDB {
+        return this.#instance ??= new this();
     }
 }

@@ -2,30 +2,44 @@ import m from "mithril";
 import "./SearchEngineDB";
 import SearchEngine from "./SearchEngine";
 import SearchEngineDB from "./SearchEngineDB";
+import SettingsStorage from "./SettingsStorage";
 
 export default class UI implements m.Component {
     _db: SearchEngineDB;
     _data: SearchEngine[];
+    _settings: SettingsStorage;
     loading: boolean = false;
 
-    constructor(db: SearchEngineDB) {
-        this._db = db;
+    constructor() {
+        this._db = SearchEngineDB.instance;
         this._data = [];
+        this._settings = SettingsStorage.instance;
+
         this.refresh();
     }
 
     view(vnode: m.Vnode<{}, this>): m.Children | null | void {
         if (this.loading) return m("div", "Loading...");
+
+        const selectedEngine = this._settings.activeUrl;
+        
         return [
             m("form",
                 { onsubmit: (event: SubmitEvent) => this.handleAddEngineSubmit(event) },
-                m(`input[name="name"]`),
-                m(`input[name="url"]`),
-                m(`button[type="submit"]`, "Add"),
+                m(`input[name=name]`),
+                m(`input[name=url]`),
+                m(`button[type=submit]`, "Add"),
             ),
             m("table",
                 this._data.map(engine =>
                     m("tr",
+                        m(`input[type=radio][name=selectedEngine]`,
+                            {
+                                onchange: () => this.setSelectedSearchEngine(engine.url),
+                                value: engine.url,
+                                checked: engine.url === selectedEngine,
+                            },
+                        ),
                         m("td",
                             engine.name,
                         ),
@@ -33,7 +47,7 @@ export default class UI implements m.Component {
                             engine.url,
                         ),
                         m("td",
-                            m("button", { onclick: () => this.removeEngine(engine.name) }, "X")
+                            m("button", { onclick: () => this.removeEngine(engine.url) }, "X")
                         )
                     )
                 ),
@@ -74,11 +88,15 @@ export default class UI implements m.Component {
             url: urlInput.value,
         });
 
-        nameInput.value = ""
-        urlInput.value = ""
+        nameInput.value = "";
+        urlInput.value = "";
     }
 
-    removeEngine(name: string): void {
-        this._db.removeEngine(name).finally(() => this.refresh());
+    removeEngine(url: string): void {
+        this._db.removeEngine(url).finally(() => this.refresh());
+    }
+
+    setSelectedSearchEngine(url: string): void {
+        this._settings.activeUrl = url;
     }
 }

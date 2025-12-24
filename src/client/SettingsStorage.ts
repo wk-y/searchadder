@@ -1,4 +1,6 @@
 export default class SettingsStorage {
+    static #instance?: SettingsStorage;
+    
     static ACTIVE_URL_KEY = "activeSearchEngineUrl";
 
     constructor() {
@@ -16,5 +18,9 @@ export default class SettingsStorage {
 
     get activeUrl(): string | null {
         return window.localStorage.getItem(SettingsStorage.ACTIVE_URL_KEY);
+    }
+
+    static get instance(): SettingsStorage {
+        return this.#instance ??= new this();
     }
 }
