@@ -22,12 +22,18 @@ export default class UI implements m.Component {
         if (this.loading) return m("div", "Loading...");
 
         const selectedEngine = this._settings.activeUrl;
-        
+
         return [
             m("form",
                 { onsubmit: (event: SubmitEvent) => this.handleAddEngineSubmit(event) },
-                m(`input[name=name]`),
-                m(`input[name=url]`),
+                m("label",
+                    "Name: ",
+                    m(`input[name=name]`),
+                ),
+                m("label",
+                    "URL: ",
+                    m(`input[name=url]`),
+                ),
                 m(`button[type=submit]`, "Add"),
             ),
             m("table",
