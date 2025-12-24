@@ -10,15 +10,13 @@ export default {
         }
         switch (url.pathname) {
             case "/opensearch.xml":
-                const name = url.searchParams.get("name");
                 const searchUrl = url.searchParams.get("url");
 
-                if (!name) return new Response(`Missing search parameter "name"`, { status: 400 });
                 if (!searchUrl) return new Response(`Missing search parameter "url"`, { status: 400 });
                 
                 const faviconURL = new URL("/favicon.ico", url.origin);
 
-                return new OpenSearchResponse(name, searchUrl, faviconURL.toString());
+                return new OpenSearchResponse(searchUrl, faviconURL.toString());
 
             default:
                 return new Response("Not Found", { status: 404 });

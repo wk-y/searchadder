@@ -1,6 +1,6 @@
 import { NAME } from "../constants";
 export class OpenSearchResponse extends Response {
-    constructor(name: string, url: string, faviconURL: string) {
+    constructor(url: string, faviconURL: string) {
         const transformedUrl = url
             .replaceAll("{", "%7B")
             .replaceAll("}", "%7D")
