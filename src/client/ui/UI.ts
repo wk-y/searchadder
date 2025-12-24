@@ -110,5 +110,6 @@ export default class UI implements m.ClassComponent {
 
     setSelectedSearchEngine(url: string): void {
         this._settings.activeUrl = url;
+        window.location.reload();
     }
 }

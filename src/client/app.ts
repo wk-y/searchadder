@@ -4,9 +4,6 @@ import UI from "./ui/UI";
 import SettingsStorage from "./SettingsStorage";
 import { NAME } from "../constants";
 
-const app = document.getElementById("app");
-if (!app) throw Error("#app does not exist");
-
 const activeUrl = SettingsStorage.instance.activeUrl;
 if (activeUrl) {
     const engineUrl = new URL("/opensearch.xml", window.location.origin);
@@ -16,7 +13,11 @@ if (activeUrl) {
     engineLink.type = "application/opensearchdescription+xml";
     engineLink.title = NAME;
     engineLink.href = engineUrl.toString();
-    document.head.appendChild(engineLink);
+    document.write(engineLink.outerHTML);
 }
 
-m.mount(app, UI);
+document.addEventListener("DOMContentLoaded", () => {
+    const app = document.getElementById("app");
+    if (!app) throw Error("#app does not exist");
+    m.mount(app, UI);
+});
