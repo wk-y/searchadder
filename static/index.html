@@ -1,101 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <script>
-            let log = document.createElement("pre");
-            log.setAttribute("id", "log");
 
-            let dummySearch;
-            let documentReady = new Promise((resolve) => document.addEventListener("DOMContentLoaded", () => {
-                document.body.appendChild(log)
-                dummySearch = document.getElementById("dummy-search");
-                resolve();
-            }));
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="dist/app.js"></script>
+</head>
 
-            async function main() {
-                let search = window.location.search;
-                
-                if (!search) {
-                    log.append("Please set the search engine.\n");
-                    await documentReady;
-                    dummySearch.remove();
-                    return;
-                };
+<body>
+    <div id="app">
+        JavaScript is required.
+    </div>
+</body>
 
-                let params = new URLSearchParams(search);
-
-                let name = params.get("name");
-                if (!name) {
-                    log.append("Please set the name.\n");
-                    await documentReady;
-                    dummySearch.remove();
-                    return;
-                };
-
-                let url = params.get("url");
-                if (!url) {
-                    log.append("Please set the URL.\n");
-                    await documentReady;
-                    dummySearch.remove();
-                    return;
-                };
-
-                let parsedUrl;
-                try {
-                    parsedUrl = new URL(url)
-                } catch {
-                    log.append("Invalid URL!")
-                    await documentReady;
-                    dummySearch.remove();
-                    return;
-                }
-
-                // put the OpenSearch specification into the head
-                let link = document.createElement("link");
-                for (const [k, v] of [
-                    ["rel", "search"],
-                    ["title", name],
-                    ["type", "application/opensearchdescription+xml"],
-                    ["href", `/opensearch/${encodeURIComponent(name)}/${encodeURIComponent(url)}/opensearch.xml`]
-                ]) {
-                    link.setAttribute(k, v);
-                }
-
-                document.write(link.outerHTML);
-
-                await documentReady;
-                document.querySelector(`input[name="name"]`).value = name;
-                document.querySelector(`input[name="url"]`).value = url;
-
-                let searchUrl = new URL(parsedUrl)
-                let entries = searchUrl.searchParams.entries()
-                for (const [k, v] of entries) {
-                    if (v == "%s") {
-                        searchUrl.searchParams.delete(k, v)
-                        document.getElementById("dummy-search-query").setAttribute("name", k)
-                        break
-                    }
-                }
-
-                document.getElementById("dummy-search").setAttribute("action", url)
-                log.append("Do a search to make the engine available.")
-            }
-
-            main();
-        </script>
-    </head>
-    <body>
-        <form action="/" method="get">
-            <label for="name">Name: </label><input name="name">
-            <label for="url">URL: </label><input name="url">
-            <button type="submit">Update Search</button>
-        </form>
-
-        <form id="dummy-search" method="get">
-            <input name="q" type="text" id="dummy-search-query" value="test query">
-            <button type="submit">Do dummy search</button>
-        </form>
-
-        <p><a href="https://github.com/wk-y/searchadder">Source</a></p>
-    </body>
 </html>
