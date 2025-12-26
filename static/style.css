@@ -29,5 +29,6 @@ body {
 }
 
 .engineRow td {
-    padding: 0.1cm;
+    padding: 0 0.1cm;
+    line-height: 1.75em;
 }
