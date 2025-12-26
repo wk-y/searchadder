@@ -32,3 +32,9 @@ body {
     padding: 0 0.1cm;
     line-height: 1.75em;
 }
+
+input[form="addEngineForm"] {
+    min-width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
