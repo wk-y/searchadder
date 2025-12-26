@@ -3,9 +3,7 @@ export default class SettingsStorage {
     
     static ACTIVE_URL_KEY = "activeSearchEngineUrl";
 
-    constructor() {
-
-    }
+    constructor() {}
 
     set activeUrl(value: string | null) {
         if (value === null) {
