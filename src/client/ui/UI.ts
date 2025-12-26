@@ -58,28 +58,41 @@ export default class UI implements m.ClassComponent {
                 ),
                 m(`button[type=submit]`, "Add"),
             ),
-            m("table",
-                this._data.map(engine =>
-                    m("tr",
+            m("table.engineTable",
+                m("tr",
+                    m("td"),
+                    m("th", "Name"),
+                    m("th", "URL"),
+                    m("td"),
+                ),
+                this._data.map(engine => {
+                    const rowId = `engine-${window.btoa(engine.url)}`;
+                    return m("tr.engineRow",
                         { key: engine.url },
-                        m(`input[type=radio][name=selectedEngine]`,
-                            {
-                                onchange: () => this.setSelectedSearchEngine(engine.url),
-                                value: engine.url,
-                                checked: engine.url === selectedEngine,
-                            },
-                        ),
                         m("td",
-                            engine.name,
+                            m(`input[type=radio][name=selectedEngine]`,
+                                {
+                                    onchange: () => this.setSelectedSearchEngine(engine.url),
+                                    value: engine.url,
+                                    checked: engine.url === selectedEngine,
+                                    id: rowId,
+                                },
+                            ),
                         ),
-                        m("td",
-                            engine.url,
+                        m("label.engineLabel",
+                            { for: rowId },
+                            m("td",
+                                engine.name,
+                            ),
+                            m("td",
+                                engine.url,
+                            ),
                         ),
                         m("td",
                             m("button", { onclick: () => this.removeEngine(engine.url) }, "X")
                         )
-                    )
-                ),
+                    );
+                }),
             )
         ];
     }
